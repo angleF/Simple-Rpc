@@ -1,11 +1,12 @@
 package org.rpc.provider;
 
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.rpc.provider.handler.ServerInitHandler;
+import com.google.common.io.Files;
+import com.google.common.reflect.ClassPath;
+import org.apache.commons.lang3.ClassPathUtils;
+import org.rpc.provider.handler.expose.ServiceHelper;
+import org.rpc.provider.netty.Netty4Server;
+
+import java.util.Properties;
 
 /**
  * @author zhaoliang.fu
@@ -17,15 +18,14 @@ import org.rpc.provider.handler.ServerInitHandler;
 public class ServerMain {
 
     public static void main(String[] args) {
-        EventLoopGroup bossLoopGroup=new NioEventLoopGroup();
-        EventLoopGroup workLoopGroup=new NioEventLoopGroup();
-        ServerBootstrap serverBootstrap=new ServerBootstrap();
-        serverBootstrap.group(bossLoopGroup,workLoopGroup)
-                .childOption(ChannelOption.SO_KEEPALIVE,true)
-                .childOption(ChannelOption.TCP_NODELAY,true)
-                .option(ChannelOption.SO_BACKLOG, 1024)
-                .channel(NioServerSocketChannel.class)
-                .childHandler(new ServerInitHandler())
-                .bind(8760);
+
+//        String qualifiedName = ClassPathUtils.toFullyQualifiedPath(ServerMain.class, "sds");
+//        Files.
+//        System.err.println(qualifiedName);
+        ServiceHelper serviceHelper = new ServiceHelper();
+
+
+        Netty4Server netty4Server = new Netty4Server();
+        netty4Server.start();
     }
 }

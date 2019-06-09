@@ -1,0 +1,3 @@
+org.rpc.serialize.impl.FastJsonSerializer
+org.rpc.serialize.impl.HessianSerializer
+org.rpc.serialize.impl.ProtostuffSerializer
