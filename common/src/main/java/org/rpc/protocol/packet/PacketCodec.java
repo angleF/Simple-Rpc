@@ -1,10 +1,9 @@
-package org.rpc.provider.handler.packet;
+package org.rpc.protocol.packet;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.CodecException;
 import lombok.extern.slf4j.Slf4j;
 import org.rpc.constant.CommonConstant;
-import org.rpc.protocol.Packet;
 import org.rpc.protocol.RpcRequest;
 import org.rpc.protocol.RpcResult;
 import org.rpc.serialize.Serializer;
@@ -67,11 +66,17 @@ public class PacketCodec {
     public void encode(ByteBuf byteBuf,Packet packet) {
         Serializer serializer = packet.getSerializer();
         byte[] bytes = serializer.serialize(packet);
+        // 魔数
         byteBuf.writeInt(CommonConstant.MAGIC_NUMBER);
+        // version
         byteBuf.writeByte(0);
+        // 数据类型 request/response
         byteBuf.writeByte(packet.getType());
+        //序列化方式
         byteBuf.writeByte(serializer.getSerializerAlgorithm());
+        // 长度
         byteBuf.writeInt(bytes.length);
+        //正文
         byteBuf.writeBytes(bytes);
     }
 

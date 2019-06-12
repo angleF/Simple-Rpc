@@ -1,4 +1,4 @@
-package org.rpc.protocol;
+package org.rpc.protocol.packet;
 
 import lombok.Getter;
 import lombok.Setter;

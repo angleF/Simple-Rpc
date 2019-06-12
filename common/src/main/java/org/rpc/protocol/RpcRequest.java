@@ -2,7 +2,7 @@ package org.rpc.protocol;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.rpc.protocol.Packet;
+import org.rpc.protocol.packet.Packet;
 
 import java.util.Map;
 

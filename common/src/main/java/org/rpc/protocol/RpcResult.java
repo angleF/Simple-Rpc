@@ -1,6 +1,7 @@
 package org.rpc.protocol;
 
 import lombok.Data;
+import org.rpc.protocol.packet.Packet;
 
 import java.util.HashMap;
 import java.util.Map;
